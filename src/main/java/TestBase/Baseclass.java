@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-
-import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,7 +17,6 @@ public class Baseclass {
 	public static WebDriver driver;
 	public static Properties config=new Properties();
 	public static FileInputStream fis;
-	public static Logger log=Logger.getLogger(Baseclass.class);
 	public static WebDriverWait wait;
 	
 	
@@ -28,11 +25,10 @@ public class Baseclass {
 		if(driver==null) {
 			FileInputStream fis=new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\Properties\\Config.properties");
 			config.load(fis);
-			log.debug("config file loaded ");	
 		if(config.getProperty("browser").equals("chrome")){
 			System.setProperty("webdriver.chrome.driver", "C:\\Users\\User\\Desktop\\chromedriver.exe");
 			driver=new ChromeDriver();
-			log.debug("Chrome launched ");
+			
 		}
 		else if(config.getProperty("browser").equals("firefox")) {
 			System.setProperty("webdriver.gecko.driver", "C:\\Users\\User\\Desktop\\geckodriver.exe");
@@ -50,7 +46,7 @@ public void teardown() {
 		if(driver!=null) {
 			driver.close();
 		}
-		log.debug("Excution compeleted");
+		
 	
 }}
 
